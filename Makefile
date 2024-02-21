@@ -14,8 +14,12 @@ OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 # Executable name
 EXEC = my_htop
 
+# Docker configuration
+DOCKER_IMAGE_NAME = my_htop_image
+DOCKER_CONTAINER_NAME = my_htop_container
+
 # Phony targets
-.PHONY: all clean fclean run re valgrind
+.PHONY: all clean fclean run re valgrind dev-up docker-build docker-run docker-stop docker-remove
 
 # Default target to build the executable
 all: $(EXEC)
@@ -51,3 +55,22 @@ re: fclean all
 # Target to analyze the program with Valgrind
 valgrind: $(EXEC)
 	@valgrind --leak-check=full --show-leak-kinds=all ./$(EXEC)
+
+dev-up: docker-build docker-run
+
+# Target to build the Docker image
+docker-build:
+	@docker build -t $(DOCKER_IMAGE_NAME) .
+
+# Target to run the Docker container
+docker-run:
+	@docker run --name $(DOCKER_CONTAINER_NAME) -it --rm $(DOCKER_IMAGE_NAME)
+
+# Target to stop the Docker container
+docker-stop:
+	@docker stop $(DOCKER_CONTAINER_NAME)
+
+# Target to remove the Docker image and container forcefully
+docker-remove:
+	@docker rmi -f $(DOCKER_IMAGE_NAME)
+	@docker rm -f $(DOCKER_CONTAINER_NAME)
