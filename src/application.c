@@ -3,13 +3,19 @@
 //
 
 #include "./../include/application.h"
+#include <ncurses.h>
 
 void initializeApplication() {
-    // Initialization of resources, for example Ncurses configuration
+    // Initialize the Ncurses library
+    initscr();
+    cbreak();
+    noecho();
+    keypad(stdscr, TRUE);
 }
 
 void cleanupApplication() {
-    // Cleaning and releasing resources
+    // Clean up and exit Ncurses properly
+    endwin();
 }
 
 void updateApplication() {

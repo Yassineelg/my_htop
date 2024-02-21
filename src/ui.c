@@ -5,5 +5,7 @@
 #include <ncurses.h>
 
 void renderApplication() {
-    // Use Ncurses to draw the user interface in the terminal
+    erase();
+    mvprintw(0, 0, "Appuyez sur 'q' pour quitter.");
+    refresh();
 }

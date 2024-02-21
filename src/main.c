@@ -6,16 +6,17 @@
 #include "./../include/input.h"
 #include "./../include/ui.h"
 
+int running = 1; // Control the main loop
+
 int main() {
     initializeApplication();
 
-    while (1) {
+    while (running) {
         processInput();
         updateApplication();
         renderApplication();
     }
 
     cleanupApplication();
-
     return 0;
 }
