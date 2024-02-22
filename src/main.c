@@ -5,6 +5,7 @@
 #include "./../include/application.h"
 #include "./../include/input.h"
 #include "./../include/ui.h"
+#include <unistd.h>
 
 int running = 1; // Control the main loop
 
