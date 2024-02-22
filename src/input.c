@@ -3,17 +3,24 @@
 //
 
 #include "./../include/input.h"
+#include "./../include/application.h"
 #include <ncurses.h>
 
-extern int running; // Global variable to control the main loop
+extern void renderApplication();
+extern int running;
 
+/**
+ * Process the input from the user
+ */
 void processInput() {
-    nodelay(stdscr, TRUE); // Set the window to non-blocking mode
-    int ch = getch(); // Get the input from the user
-
+    int ch = getch();
     switch(ch) {
-        case 'q': // Quit the application
-            running = 0;
-            break;
+    case ' ': // Space key to refresh the process list
+        updateApplication();
+        renderApplication();
+        break;
+    case 'q': // Q key to quit the application
+        running = 0;
+        break;
     }
 }
