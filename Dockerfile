@@ -1,5 +1,5 @@
-# Use a slim version of Debian as the base image
-FROM debian:bullseye-slim
+# Use bookworm-slim as the base image
+FROM debian:bookworm-slim
 
 # Update the package lists and install necessary packages
 # build-essential: contains essential tools for building binaries
@@ -23,3 +23,6 @@ COPY . .
 
 # Compile the application using the make command
 RUN make
+
+# Set the default command to run when the container starts
+CMD ["./my_htop"]
